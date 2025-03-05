@@ -60,14 +60,14 @@ This will run the application in development mode with live reload.
 
 You can fetch user data using the following `curl` command:
 
-````sh
+```sh
 curl -G "http://localhost:3000/users" \
---data-urlencode "min=1000" \
---data-urlencode "max=5000" \
---data-urlencode "offset=10" \
---data-urlencode "limit=50" \
---data-urlencode "sort=NAME"```
-````
+     --data-urlencode "min=1000" \
+     --data-urlencode "max=5000" \
+     --data-urlencode "offset=10" \
+     --data-urlencode "limit=50" \
+     --data-urlencode "sort=NAME"
+```
 
 This request retrieves users whose salary falls between 1,000 and 5,000, with pagination controls (`offset=10`, `limit=50`) and sorted by name.
 
@@ -76,9 +76,15 @@ This request retrieves users whose salary falls between 1,000 and 5,000, with pa
 To upload a CSV file containing user data, use:
 
 ```sh
+curl -X POST http://localhost:3000/upload \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     --data-urlencode "file=name,salary%0AAlex,3000.0%0ABryan,3500.0"
+```
+
+```sh
 curl -X POST "http://localhost:3000/upload" \
--H "Content-Type: multipart/form-data" \
--F "file=@./data/data.csv"
+     -H "Content-Type: multipart/form-data" \
+     -F "file=@./data/data.csv"
 ```
 
 This sends a CSV file located at `./data/data.csv` to the server for processing.

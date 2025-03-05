@@ -49,6 +49,8 @@ export function SalaryTable() {
         },
       });
 
+      await new Promise((resolve) => setTimeout(resolve, 100000));
+
       const responseData = response.data;
       const persons = responseData.results as {
         name: string;
@@ -65,80 +67,78 @@ export function SalaryTable() {
     setMax(4000);
   };
 
-  return isLoading ? (
-    <Loader />
-  ) : (
-    persons && (
-      <Stack gap="xl">
-        <Title> Salary </Title>
-        <Accordion>
-          <Accordion.Item key="filters" value="Filters">
-            <Accordion.Control icon={<IconFilter />}>Filters</Accordion.Control>
-            <Accordion.Panel>
-              <Card withBorder>
-                <Grid>
-                  <Grid.Col span={{ sm: 12, md: 6 }}>
-                    <NumberInput
-                      label="Offset"
-                      value={offset}
-                      min={0}
-                      description="Offset from the beginning"
-                      onChange={(value) =>
-                        setOffset(parseInt(String(value), 10))
-                      }
-                    />
-                  </Grid.Col>
-                  <Grid.Col span={{ sm: 12, md: 6 }}>
-                    <NumberInput
-                      label="Limit"
-                      value={limit}
-                      min={0}
-                      description="0 means no limit"
-                      onChange={(value) =>
-                        setLimit(parseInt(String(value), 10))
-                      }
-                    />
-                  </Grid.Col>
-                  <Grid.Col span={{ sm: 12, md: 6 }}>
-                    <NumberInput
-                      label="Min"
-                      value={min}
-                      min={0}
-                      step={100}
-                      description="Should be less than Max"
-                      onChange={(value) => setMin(parseInt(String(value), 10))}
-                    />
-                  </Grid.Col>
-                  <Grid.Col span={{ sm: 12, md: 6 }}>
-                    <NumberInput
-                      label="Max"
-                      value={max}
-                      min={0}
-                      step={100}
-                      description="Should be greater than Min"
-                      onChange={(value) => setMax(parseInt(String(value), 10))}
-                    />
-                  </Grid.Col>
-                  <Center w="100%" m="md" onClick={handleClearFilters}>
-                    <Button>Clear Filters</Button>
-                  </Center>
-                </Grid>
-              </Card>
-            </Accordion.Panel>
-          </Accordion.Item>
+  return (
+    <Stack gap="xl">
+      <Title> Salary </Title>
+      <Accordion>
+        <Accordion.Item key="filters" value="Filters">
+          <Accordion.Control icon={<IconFilter />}>Filters</Accordion.Control>
+          <Accordion.Panel>
+            <Card withBorder>
+              <Grid>
+                <Grid.Col span={{ sm: 12, md: 6 }}>
+                  <NumberInput
+                    label="Offset"
+                    value={offset}
+                    min={0}
+                    description="Offset from the beginning"
+                    onChange={(value) => setOffset(parseInt(String(value), 10))}
+                  />
+                </Grid.Col>
+                <Grid.Col span={{ sm: 12, md: 6 }}>
+                  <NumberInput
+                    label="Limit"
+                    value={limit}
+                    min={0}
+                    description="0 means no limit"
+                    onChange={(value) => setLimit(parseInt(String(value), 10))}
+                  />
+                </Grid.Col>
+                <Grid.Col span={{ sm: 12, md: 6 }}>
+                  <NumberInput
+                    label="Min"
+                    value={min}
+                    min={0}
+                    step={100}
+                    description="Should be less than Max"
+                    onChange={(value) => setMin(parseInt(String(value), 10))}
+                  />
+                </Grid.Col>
+                <Grid.Col span={{ sm: 12, md: 6 }}>
+                  <NumberInput
+                    label="Max"
+                    value={max}
+                    min={0}
+                    step={100}
+                    description="Should be greater than Min"
+                    onChange={(value) => setMax(parseInt(String(value), 10))}
+                  />
+                </Grid.Col>
+                <Center w="100%" m="md" onClick={handleClearFilters}>
+                  <Button>Clear Filters</Button>
+                </Center>
+              </Grid>
+            </Card>
+          </Accordion.Panel>
+        </Accordion.Item>
 
-          <Accordion.Item key="upload" value="Upload">
-            <Accordion.Control icon={<IconFileTypeCsv />}>
-              File Upload
-            </Accordion.Control>
-            <Accordion.Panel>
-              <Card withBorder>
-                <CsvFileInput />
-              </Card>
-            </Accordion.Panel>
-          </Accordion.Item>
-        </Accordion>
-        <Card withBorder>
+        <Accordion.Item key="upload" value="Upload">
+          <Accordion.Control icon={<IconFileTypeCsv />}>
+            File Upload
+          </Accordion.Control>
+          <Accordion.Panel>
+            <Card withBorder>
+              <CsvFileInput />
+            </Card>
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion>
+      <Card withBorder>
+        {isLoading ? (
+          <Center w="100%">
+            <Loader m="md" />
+          </Center>
+        ) : (
           <Table>
             <Table.Thead>
               <Table.Tr>
@@ -170,16 +170,17 @@ export function SalaryTable() {
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>
-              {persons.map((person) => (
-                <Table.Tr key={person.name}>
-                  <Table.Td>{person.name}</Table.Td>
-                  <Table.Td>${person.salary.toFixed(2)}</Table.Td>
-                </Table.Tr>
-              ))}
+              {persons &&
+                persons.map((person) => (
+                  <Table.Tr key={person.name}>
+                    <Table.Td>{person.name}</Table.Td>
+                    <Table.Td>${person.salary.toFixed(2)}</Table.Td>
+                  </Table.Tr>
+                ))}
             </Table.Tbody>
           </Table>
-        </Card>
-      </Stack>
-    )
+        )}
+      </Card>
+    </Stack>
   );
 }

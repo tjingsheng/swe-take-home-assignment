@@ -64,10 +64,16 @@ apiRouter.post("/upload", upload.single("file"), async (req, res, next) => {
     const addedCount = updatedPersons.length - existingPersons.length;
     const updatedCount = newPersons.length - addedCount;
 
+    const message =
+      updatedCount === 0 && addedCount === 0
+        ? "No changes. Please make sure your headers are correct"
+        : undefined;
+
     res.json({
       success: 1,
       updatedPersons: updatedCount,
       addedPersons: addedCount,
+      message,
     });
   } catch (error) {
     next(error);

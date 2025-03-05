@@ -14,6 +14,7 @@ export function validatePersons(data: unknown[]): Person[] {
     const validation = personSchema.safeParse(person);
     if (!validation.success) {
       console.error("Invalid person data:", validation.error);
+      console.log("Skipping invalid person data", person);
       return undefined;
     }
     return validation.data;

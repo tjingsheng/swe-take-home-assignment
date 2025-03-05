@@ -21,6 +21,9 @@ importers:
       '@faker-js/faker':
         specifier: ^9.5.1
         version: 9.5.1
+      '@types/express':
+        specifier: ^5.0.0
+        version: 5.0.0
       '@types/multer':
         specifier: ^1.4.12
         version: 1.4.12

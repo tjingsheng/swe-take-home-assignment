@@ -8,19 +8,31 @@ import { parseCSV } from "../utils.ts";
 export const apiRouter: Router = express.Router();
 const upload = multer();
 
-apiRouter.get("/health", (_, res) => {
-  res.json({ message: "healthy!" });
+apiRouter.get("/health", (_, res, next) => {
+  try {
+    res.json({ message: "healthy!" });
+  } catch (error) {
+    next(error);
+  }
 });
 
-apiRouter.get("/users", async (_, res) => {
-  const data = await readData();
-  res.json({ results: data });
+apiRouter.get("/users", async (_, res, next) => {
+  try {
+    const data = await readData();
+    res.json({ results: data });
+  } catch (error) {
+    next(error);
+  }
 });
 
 // TODO: We should use application/x-www-form-urlencoded as required, instead of multipart/form-data for file uploads
-apiRouter.post("/upload", upload.single("file"), async (req, res) => {
-  const fileBuffer = req.file.buffer;
-  const csvData = await parseCSV<Person>(fileBuffer);
-  await writeData(csvData);
-  res.json({ success: 1 });
+apiRouter.post("/upload", upload.single("file"), async (req, res, next) => {
+  try {
+    const fileBuffer = req.file.buffer;
+    const csvData = await parseCSV<Person>(fileBuffer);
+    await writeData(csvData);
+    res.json({ success: 1 });
+  } catch (error) {
+    next(error);
+  }
 });

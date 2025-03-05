@@ -278,3 +278,7 @@ This sends a CSV file located at `./data/data.csv` to the server for processing.
 - **[`cross-env`](https://github.com/kentcdodds/cross-env)**: Run scripts that set and use environment variables across platforms.
 - **[`esbuild`](https://esbuild.github.io/)**: Fast JavaScript bundler and minifier for production builds.
 - **[`tsx`](https://github.com/esbuild-kit/tsx)**: Runs TypeScript files without needing compilation.
+
+## Comments
+
+Fun assignment!

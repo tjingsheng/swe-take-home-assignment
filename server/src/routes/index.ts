@@ -16,7 +16,7 @@ const upload = multer();
 
 apiRouter.get("/health", (_, res, next) => {
   try {
-    res.json({ success: 1, nodeEnv: process.env.NODE_ENV });
+    res.json({ success: 1, nodeEnv: process.env.NODE_ENV, abc: 1234 });
   } catch (error) {
     next(error);
   }

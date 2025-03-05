@@ -3,13 +3,11 @@ import path from "path";
 import { parse } from "fast-csv";
 
 import { headerTransform } from "../helpers.ts";
-
-const DATA_FOLDER = "data"; // TODO: Move to a config file
-const CSV_FILE = "data.csv"; // TODO: Move to a config file
+import { CONFIG } from "../config.ts";
 
 export async function readData(): Promise<unknown[]> {
-  const folderPath = path.join(process.cwd(), DATA_FOLDER);
-  const filePath = path.join(folderPath, CSV_FILE);
+  const folderPath = path.join(process.cwd(), CONFIG.DATA_FOLDER);
+  const filePath = path.join(folderPath, CONFIG.CSV_FILE);
   const data: unknown[] = [];
 
   return new Promise((resolve, reject) => {

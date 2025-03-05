@@ -1,14 +1,7 @@
 import { Readable } from "stream";
 import { parse } from "fast-csv";
 import { z } from "zod";
-
-// TODO: Move to a config file
-const DEFAULT_MIN = 0;
-const DEFAULT_MAX = 4000;
-const DEFAULT_OFFSET = 0;
-const DEFAULT_LIMIT = null;
-const DEFAULT_SORT = null;
-const LOCALE = "en-SG";
+import { CONFIG } from "./config.ts";
 
 const personSchema = z.object({
   name: z.string(),
@@ -80,15 +73,27 @@ export function validateQueryParams(queryParams: Record<string, unknown>) {
   };
 
   return {
-    min: parseQueryParam(queryParamNumber, queryParams?.min, DEFAULT_MIN),
-    max: parseQueryParam(queryParamNumber, queryParams?.max, DEFAULT_MAX),
+    min: parseQueryParam(
+      queryParamNumber,
+      queryParams?.min,
+      CONFIG.DEFAULT_MIN
+    ),
+    max: parseQueryParam(
+      queryParamNumber,
+      queryParams?.max,
+      CONFIG.DEFAULT_MAX
+    ),
     offset: parseQueryParam(
       queryParamNumber,
       queryParams?.offset,
-      DEFAULT_OFFSET
+      CONFIG.DEFAULT_OFFSET
     ),
-    limit: parseQueryParam(queryParamNumber, queryParams?.limit, DEFAULT_LIMIT),
-    sort: parseQueryParam(sortSchema, queryParams?.sort, DEFAULT_SORT),
+    limit: parseQueryParam(
+      queryParamNumber,
+      queryParams?.limit,
+      CONFIG.DEFAULT_LIMIT
+    ),
+    sort: parseQueryParam(sortSchema, queryParams?.sort, CONFIG.DEFAULT_SORT),
   };
 }
 
@@ -105,7 +110,7 @@ export function sortFilterLimitData(
 
   const sortedData = filteredData.sort((a, b) => {
     if (sort === "NAME") {
-      return a.name.localeCompare(b.name, LOCALE);
+      return a.name.localeCompare(b.name, CONFIG.LOCALE);
     } else if (sort === "SALARY") {
       return Number(a.salary) - Number(b.salary);
     }

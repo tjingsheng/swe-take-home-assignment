@@ -2,19 +2,14 @@ import fs from "fs/promises";
 import path from "path";
 import { writeToPath } from "fast-csv";
 import { faker } from "@faker-js/faker";
-
-const DATA_FOLDER = "data"; // TODO: Move to a config file
-const CSV_FILE = "data.csv"; // TODO: Move to a config file
-const SEED_ROWS = 100000;
-const MIN_SALARY = 0;
-const MAX_SALARY = 10000;
+import { CONFIG } from "./config.ts";
 
 faker.seed(0);
 
 async function seed(): Promise<void> {
   try {
-    const folderPath = path.join(process.cwd(), DATA_FOLDER);
-    const filePath = path.join(folderPath, CSV_FILE);
+    const folderPath = path.join(process.cwd(), CONFIG.DATA_FOLDER);
+    const filePath = path.join(folderPath, CONFIG.CSV_FILE);
 
     try {
       await fs.access(folderPath);
@@ -25,12 +20,12 @@ async function seed(): Promise<void> {
       await fs.mkdir(folderPath);
     }
 
-    const seedData = Array.from({ length: SEED_ROWS }, () => ({
+    const seedData = Array.from({ length: CONFIG.SEED_ROWS }, () => ({
       NAME: faker.person.firstName(),
       SALARY: faker.finance.amount({
         dec: 2,
-        min: MIN_SALARY,
-        max: MAX_SALARY,
+        min: CONFIG.SEED_MIN_SALARY,
+        max: CONFIG.SEED_MAX_SALARY,
       }),
     }));
 

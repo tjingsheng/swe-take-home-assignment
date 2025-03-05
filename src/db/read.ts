@@ -1,25 +1,58 @@
 import fs from "fs";
 import path from "path";
 import { parse } from "fast-csv";
-import { Person } from "../types.ts";
+
+import { headerTransform } from "../helpers.ts";
 
 const DATA_FOLDER = "data"; // TODO: Move to a config file
 const CSV_FILE = "data.csv"; // TODO: Move to a config file
 
-export async function readData(): Promise<Person[]> {
+export async function readData(): Promise<unknown[]> {
   const folderPath = path.join(process.cwd(), DATA_FOLDER);
   const filePath = path.join(folderPath, CSV_FILE);
-  const data: Person[] = [];
+  const data: unknown[] = [];
 
   return new Promise((resolve, reject) => {
-    fs.createReadStream(filePath)
-      .pipe(
-        parse({
-          headers: (headers) => headers.map((header) => header?.toLowerCase()),
+    if (!fs.existsSync(filePath)) {
+      return reject(new Error(`CSV file not found: ${filePath}`));
+    }
+
+    try {
+      const stream = fs.createReadStream(filePath);
+
+      stream
+        .on("error", (err) => {
+          console.error(`File Read Error: ${err.message}`);
+          reject(new Error("Failed to read the CSV file."));
         })
-      )
-      .on("data", (row) => data.push(row))
-      .on("end", () => resolve(data))
-      .on("error", (error) => reject(error));
+        .pipe(
+          parse({
+            headers: headerTransform,
+            ignoreEmpty: true,
+            trim: true,
+            strictColumnHandling: false,
+          })
+        )
+        .on("error", (err) => {
+          console.error(`CSV Parsing Error: ${err.message}`);
+          reject(new Error("Failed to parse CSV data."));
+        })
+        .on("data", (row) => {
+          data.push(row);
+        })
+        .on("end", () => {
+          if (data.length === 0) {
+            return reject(
+              new Error("CSV file is empty or contains no valid data.")
+            );
+          }
+          resolve(data);
+        });
+    } catch (error) {
+      console.error("Unexpected Error:", error);
+      reject(
+        new Error("An unexpected error occurred while processing the CSV.")
+      );
+    }
   });
 }

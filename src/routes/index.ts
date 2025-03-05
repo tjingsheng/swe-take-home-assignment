@@ -2,10 +2,11 @@ import express, { type Router } from "express";
 import { readData } from "../db/read.ts";
 import multer from "multer";
 import { writeData } from "../db/write.ts";
-import { Person } from "../types.ts";
+
 import {
   parseCSV,
   sortFilterLimitData,
+  validatePersons,
   validateQueryParams,
 } from "../helpers.ts";
 
@@ -23,9 +24,14 @@ apiRouter.get("/health", (_, res, next) => {
 apiRouter.get("/users", async (req, res, next) => {
   try {
     const queryParams = validateQueryParams(req.query);
-    const data = await readData();
-    const sortedFilteredLimitedData = sortFilterLimitData(data, queryParams);
-    res.json({ results: sortedFilteredLimitedData });
+    const csvData = await readData();
+    const persons = validatePersons(csvData);
+    const sortedFilteredLimitedPersons = sortFilterLimitData(
+      persons,
+      queryParams
+    );
+
+    res.json({ results: sortedFilteredLimitedPersons });
   } catch (error) {
     next(error);
   }
@@ -34,9 +40,15 @@ apiRouter.get("/users", async (req, res, next) => {
 // TODO: We should use application/x-www-form-urlencoded as required, instead of multipart/form-data for file uploads
 apiRouter.post("/upload", upload.single("file"), async (req, res, next) => {
   try {
-    const fileBuffer = req.file.buffer;
-    const csvData = await parseCSV<Person>(fileBuffer);
-    await writeData(csvData);
+    const fileBuffer = req.file?.buffer;
+    if (!fileBuffer) {
+      throw new Error("No file uploaded");
+    }
+
+    const csvData = await parseCSV(fileBuffer);
+    const persons = validatePersons(csvData);
+    await writeData(persons);
+
     res.json({ success: 1 });
   } catch (error) {
     next(error);

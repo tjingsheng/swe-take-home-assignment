@@ -257,6 +257,8 @@ This sends a CSV file located at `./data/data.csv` to the server for processing.
 - **[`express`](https://expressjs.com/)**: Fast, unopinionated, minimalist web framework for Node.js.
 - **[`fast-csv`](https://c2fo.github.io/fast-csv/)**: Llibrary for parsing and formatting CSVs or any other delimited value file in node.
 - **[`multer`](https://github.com/expressjs/multer)**: Multer is a node.js middleware for handling multipart/form-data.
+- **[`serverless-http`](https://www.npmjs.com/package/serverless-http)**: This module allows you to 'wrap' your API for serverless use. No HTTP server, no ports or sockets. Just your code in the same execution pipeline you are already familiar with.
+
 - **[`zod`](https://zod.dev/)**: TypeScript-first schema validation with static type inference.
 
 ### **Development Dependencies**

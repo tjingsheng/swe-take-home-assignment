@@ -235,59 +235,60 @@ This sends a CSV file located at `./data/data.csv` to the server for processing.
 
 ## Dependencies Overview
 
-### **Root Dependencies Overview**
+## **Production Dependencies**
 
-#### **Development Dependencies**
+### **Web App**
 
-- **[`prettier`](https://prettier.io/)**: An opinionated code formatter
+- **[\@mantine/core](https://mantine.dev/)**: Fully featured React components library.
+- **[\@mantine/hooks](https://mantine.dev/hooks/getting-started/)**: Useful React hooks for building UIs.
+- **[\@tabler/icons-react](https://tabler-icons.io/)**: React icon set for UI elements, recommended by Mantine.
+- **[\@tanstack/react-query](https://tanstack.com/query/)**: Powerful asynchronous state management for TS/JS.
+- **[axios](https://axios-http.com/)**: Promise-based HTTP client for browser and Node.js.
+- **[react](https://react.dev/)**: The library for building web and native UIs.
+- **[react-dom](https://react.dev/)**: Entry point for the DOM and server renderers for React.
+- **[react-router](https://reactrouter.com/)**: A flexible and standards-focused router for React.
 
-### **Web Application Dependencies Overview**
+### **Server**
 
-#### **Production Dependencies**
+- **[express](https://expressjs.com/)**: Fast, unopinionated, minimalist web framework for Node.js.
+- **[fast-csv](https://c2fo.github.io/fast-csv/)**: Library for parsing and formatting CSV files in Node.
+- **[multer](https://github.com/expressjs/multer)**: Middleware for handling `multipart/form-data` uploads.
+- **[serverless-http](https://www.npmjs.com/package/serverless-http)**: Wraps an Express app for serverless deployment.
+- **[zod](https://zod.dev/)**: TypeScript-first schema validation with static type inference.
+- **[\@dotenvx/dotenvx](https://dotenvx.com/)**: Improved environment variable management.
+- **[axios](https://axios-http.com/)**: Also used on the server side.
 
-- **[`@mantine/*`](https://mantine.dev/)**: A fully features React components library
-- **[`@tabler/icons-react`](https://tabler-icons.io/)**: React icon set for UI elements, reccomended by Mantine.
-- **[`@tanstack/react-query`](https://tanstack.com/query/latest/docs/react/overview)**: Powerful asynchronous state management for TS/JS, React, and more.
-- **[`axios`](https://axios-http.com/)**: Promise based HTTP client for the browser and node.js.
-- **[`react`](https://react.dev/)**: The library for web and native user interfaces.
-- **[`react-dom`](https://react.dev/)**: The entry point to the DOM and server renderers for React.
-- **[`react-router`](https://reactrouter.com/)**: A user‑obsessed, standards‑focused, multi‑strategy router you can deploy anywhere.
+---
 
-#### **Development Dependencies**
+## **Development Dependencies**
 
-- **[`@eslint/js`](https://eslint.org/)**: ESLint configuration for JavaScript.
-- **[`@types/react`](https://www.npmjs.com/package/@types/react)**: TypeScript types for React.
-- **[`@types/react-dom`](https://www.npmjs.com/package/@types/react-dom)**: TypeScript types for ReactDOM.
-- **[`@vitejs/plugin-react`](https://vitejs.dev/guide/#using-plugins)**: React plugin for Vite.
-- **[`eslint`](https://eslint.org/)**: The pluggable linting utility for JavaScript and JSX.
-- **[`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks)**: Enforces React Hooks rules.
-- **[`eslint-plugin-react-refresh`](https://www.npmjs.com/package/eslint-plugin-react-refresh)**: Ensures proper use of React Refresh.
-- **[`globals`](https://www.npmjs.com/package/globals)**: Provides a list of global variables for linting.
-- **[`typescript`](https://www.typescriptlang.org/)**: Static typing for JavaScript.
-- **[`typescript-eslint`](https://typescript-eslint.io/)**: ESLint plugin for TypeScript.
-- **[`vite`](https://vitejs.dev/)**: Fast development server and build tool for modern frontends.
+### **Web App**
 
-## **Server Dependencies Overview**
+- **[\@eslint/js](https://eslint.org/)**: ESLint configuration for JavaScript.
+- **[\@types/react](https://www.npmjs.com/package/@types/react)**: TypeScript types for React.
+- **[\@types/react-dom](https://www.npmjs.com/package/@types/react-dom)**: TypeScript types for ReactDOM.
+- **[\@vitejs/plugin-react](https://vitejs.dev/guide/#using-plugins)**: React plugin for Vite.
+- **[eslint](https://eslint.org/)**: Pluggable linting utility for JavaScript and JSX.
+- **[eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)**: Enforces React Hooks rules.
+- **[eslint-plugin-react-refresh](https://www.npmjs.com/package/eslint-plugin-react-refresh)**: Ensures proper use of React Refresh.
+- **[globals](https://www.npmjs.com/package/globals)**: Provides a list of global variables for linting.
+- **[typescript](https://www.typescriptlang.org/)**: Static typing for JavaScript.
+- **[typescript-eslint](https://typescript-eslint.io/)**: ESLint plugin for TypeScript.
+- **[vite](https://vitejs.dev/)**: Fast development server and build tool for modern frontends.
+- **[prettier](https://prettier.io/)**: Code formatter for consistent style.
 
-### **Production Dependencies**
+### **Server**
 
-- **[`express`](https://expressjs.com/)**: Fast, unopinionated, minimalist web framework for Node.js.
-- **[`fast-csv`](https://c2fo.github.io/fast-csv/)**: Llibrary for parsing and formatting CSVs or any other delimited value file in node.
-- **[`multer`](https://github.com/expressjs/multer)**: Multer is a node.js middleware for handling multipart/form-data.
-- **[`serverless-http`](https://www.npmjs.com/package/serverless-http)**: This module allows you to 'wrap' your API for serverless use. No HTTP server, no ports or sockets. Just your code in the same execution pipeline you are already familiar with.
+- **[\@faker-js/faker](https://fakerjs.dev/)**: Generate realistic fake data for testing.
+- **[\@types/express](https://www.npmjs.com/package/@types/express)**: TypeScript types for Express.
+- **[\@types/multer](https://www.npmjs.com/package/@types/multer)**: TypeScript types for Multer.
+- **[\@types/node](https://www.npmjs.com/package/@types/node)**: TypeScript types for Node.js.
+- **[cross-env](https://github.com/kentcdodds/cross-env)**: Cross-platform environment variable management.
+- **[esbuild](https://esbuild.github.io/)**: Fast JavaScript bundler and minifier for production.
+- **[tsx](https://github.com/esbuild-kit/tsx)**: Runs TypeScript files without compilation.
+- **[prettier](https://prettier.io/)**: Code formatter for consistent style.
 
-- **[`zod`](https://zod.dev/)**: TypeScript-first schema validation with static type inference.
-
-### **Development Dependencies**
-
-- **[`@dotenvx/dotenvx`](https://dotenvx.com/)**: a better dotenv–from the creator of dotenv.
-- **[`@faker-js/faker`](https://fakerjs.dev/)**: Generate massive amounts of fake (but realistic) data for testing and development.
-- **[`@types/express`](https://www.npmjs.com/package/@types/express)**: TypeScript types for Express.
-- **[`@types/multer`](https://www.npmjs.com/package/@types/multer)**: TypeScript types for Multer.
-- **[`@types/node`](https://www.npmjs.com/package/@types/node)**: TypeScript types for Node.js.
-- **[`cross-env`](https://github.com/kentcdodds/cross-env)**: Run scripts that set and use environment variables across platforms.
-- **[`esbuild`](https://esbuild.github.io/)**: Fast JavaScript bundler and minifier for production builds.
-- **[`tsx`](https://github.com/esbuild-kit/tsx)**: Runs TypeScript files without needing compilation.
+---
 
 ## Comments
 

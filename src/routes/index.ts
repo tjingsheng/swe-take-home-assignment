@@ -15,7 +15,7 @@ const upload = multer();
 
 apiRouter.get("/health", (_, res, next) => {
   try {
-    res.json({ message: "healthy!" });
+    res.json({ success: 1 });
   } catch (error) {
     next(error);
   }
@@ -31,7 +31,7 @@ apiRouter.get("/users", async (req, res, next) => {
       queryParams
     );
 
-    res.json({ results: sortedFilteredLimitedPersons });
+    res.json({ results: sortedFilteredLimitedPersons, success: 1 });
   } catch (error) {
     next(error);
   }

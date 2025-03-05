@@ -4,6 +4,7 @@ import { errorHandler } from "./middlewares/errorHandler.ts";
 import dotenvx from "@dotenvx/dotenvx";
 import { logRequest } from "./middlewares/logRequest.ts";
 import serverless from "serverless-http";
+import { routeNotFound } from "./middlewares/routeNotFound.ts";
 
 const envPath = process.env.NODE_ENV === "development" ? `../.env` : undefined;
 
@@ -18,6 +19,8 @@ if (process.env.NODE_ENV !== "development") {
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", apiRouter);
+
+app.use(routeNotFound);
 
 app.use(errorHandler);
 

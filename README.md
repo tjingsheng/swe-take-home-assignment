@@ -12,9 +12,15 @@ Done on 5th March 2025
 
 Ambiguity: Sorting is only mentioned as NAME or SALARY, always in ascending order. There is no mention of whether sorting can be combined (e.g., sorting first by SALARY and then by NAME in case of ties).
 
-If more than one sort key is provided (e.g., ["SALARY", "NAME"]), we apply sorting in the order given, prioritizing the first key before moving to the next.
+Assumption: If more than one sort key is provided (e.g., ["SALARY", "NAME"]), we apply sorting in the order given, prioritising the first key before moving to the next.
 
-e.g. http://localhost:3000/users?sort=NAME&sort=SALARY will sort by NAME then SALARY is there is a tie
+e.g. /users?sort=NAME&sort=SALARY will sort by NAME then SALARY is there is a tie.
+
+2. Salary Range Handling
+
+Ambiguity: The default values are 0.0 for min and 4000.0 for max. However, it's not explicitly stated what happens if min > max (e.g., /users?min=5000&max=4000).
+
+Assumption: If min > max, return zero rows successfully.
 
 ## Setup
 

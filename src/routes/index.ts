@@ -3,7 +3,11 @@ import { readData } from "../db/read.ts";
 import multer from "multer";
 import { writeData } from "../db/write.ts";
 import { Person } from "../types.ts";
-import { parseCSV } from "../utils.ts";
+import {
+  parseCSV,
+  sortFilterLimitData,
+  validateQueryParams,
+} from "../helpers.ts";
 
 export const apiRouter: Router = express.Router();
 const upload = multer();
@@ -16,10 +20,12 @@ apiRouter.get("/health", (_, res, next) => {
   }
 });
 
-apiRouter.get("/users", async (_, res, next) => {
+apiRouter.get("/users", async (req, res, next) => {
   try {
+    const queryParams = validateQueryParams(req.query);
     const data = await readData();
-    res.json({ results: data });
+    const sortedFilteredLimitedData = sortFilterLimitData(data, queryParams);
+    res.json({ results: sortedFilteredLimitedData });
   } catch (error) {
     next(error);
   }

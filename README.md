@@ -34,6 +34,15 @@ Ambiguity: The requirement states that concurrent uploads are desirable but does
 
 Assumption: The last successful upload overwrites the previous one (last write wins).
 
+5. HTTP Response Codes
+
+Ambiguity: Which HTTP status codes should be used for specific failures?
+
+Assumption:
+
+- `200 OK` → Successful operations.
+- `500 Internal Server Error` → Unexpected failures.
+
 ## Setup
 
 ### Prerequisites

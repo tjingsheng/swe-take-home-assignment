@@ -40,9 +40,7 @@ export async function readData(): Promise<unknown[]> {
         })
         .on("end", () => {
           if (data.length === 0) {
-            return reject(
-              new Error("CSV file is empty or contains no valid data.")
-            );
+            console.warn("CSV file is empty or contains no valid data.");
           }
           resolve(data);
         });

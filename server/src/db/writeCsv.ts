@@ -5,7 +5,7 @@ import axios from "axios";
 import { CONFIG } from "../config.ts";
 
 export async function writeCsv(
-  newData: Record<string, unknown>[]
+  newData: Record<string, unknown>[],
 ): Promise<void> {
   const NODE_ENV = process.env.NODE_ENV || "development";
   const isProduction = NODE_ENV === "production";
@@ -43,7 +43,7 @@ export async function writeCsv(
             Object.entries(row).map(([key, value]) => [
               key.toUpperCase(),
               value,
-            ])
+            ]),
           ),
       });
 
@@ -77,8 +77,8 @@ export async function writeCsv(
       if (!GIST_ID || !GITHUB_TOKEN) {
         return reject(
           new Error(
-            "GIST_ID or GITHUB_TOKEN is missing from environment variables."
-          )
+            "GIST_ID or GITHUB_TOKEN is missing from environment variables.",
+          ),
         );
       }
 
@@ -92,13 +92,13 @@ export async function writeCsv(
                 Object.entries(row).map(([key, value]) => [
                   key.toUpperCase(),
                   value,
-                ])
+                ]),
               ),
           });
 
           csvStream
             .on("error", (err) =>
-              reject(new Error(`CSV Formatting Error: ${err.message}`))
+              reject(new Error(`CSV Formatting Error: ${err.message}`)),
             )
             .on("data", (chunk) => csvChunks.push(chunk.toString()))
             .on("end", () => resolve(csvChunks.join("")));
@@ -121,7 +121,7 @@ export async function writeCsv(
               },
             },
           },
-          { headers }
+          { headers },
         );
 
         if (response.status === 200) {

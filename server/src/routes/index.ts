@@ -29,7 +29,7 @@ apiRouter.get("/users", async (req, res, next) => {
     const persons = validatePersons(csvData);
     const sortedFilteredLimitedPersons = sortFilterLimitData(
       persons,
-      queryParams
+      queryParams,
     );
 
     res.json({
@@ -60,7 +60,7 @@ apiRouter.post("/upload", upload.single("file"), async (req, res, next) => {
     const newPersons = validatePersons(await parseCSV(csvData));
     const newNames = new Set(newPersons.map((p) => p.name));
     const filteredExistingPersons = existingPersons.filter(
-      (p) => !newNames.has(p.name)
+      (p) => !newNames.has(p.name),
     );
 
     const updatedPersons = [...filteredExistingPersons, ...newPersons];

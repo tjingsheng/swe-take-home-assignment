@@ -43,7 +43,7 @@ export function parseCSV(input: Buffer | string): Promise<unknown[]> {
         .pipe(
           parse({
             headers: headerTransform,
-          })
+          }),
         )
         .on("data", (row) => results.push(row))
         .on("end", () => resolve(results))
@@ -66,7 +66,7 @@ export function validateQueryParams(queryParams: Record<string, unknown>) {
   const parseQueryParam = <T>(
     schema: z.ZodType<T>,
     value: unknown,
-    defaultValue: T
+    defaultValue: T,
   ): T => {
     const result = schema.safeParse(value);
     if (!result.success) {
@@ -79,22 +79,22 @@ export function validateQueryParams(queryParams: Record<string, unknown>) {
     min: parseQueryParam(
       queryParamNumber,
       queryParams?.min,
-      CONFIG.DEFAULT_MIN
+      CONFIG.DEFAULT_MIN,
     ),
     max: parseQueryParam(
       queryParamNumber,
       queryParams?.max,
-      CONFIG.DEFAULT_MAX
+      CONFIG.DEFAULT_MAX,
     ),
     offset: parseQueryParam(
       queryParamNumber,
       queryParams?.offset,
-      CONFIG.DEFAULT_OFFSET
+      CONFIG.DEFAULT_OFFSET,
     ),
     limit: parseQueryParam(
       queryParamNumber,
       queryParams?.limit,
-      CONFIG.DEFAULT_LIMIT
+      CONFIG.DEFAULT_LIMIT,
     ),
     sort: parseQueryParam(sortSchema, queryParams?.sort, CONFIG.DEFAULT_SORT),
   };
@@ -102,7 +102,7 @@ export function validateQueryParams(queryParams: Record<string, unknown>) {
 
 export function sortFilterLimitData(
   data: Person[],
-  params: ReturnType<typeof validateQueryParams>
+  params: ReturnType<typeof validateQueryParams>,
 ) {
   const { min, max, offset, limit, sort } = params;
 

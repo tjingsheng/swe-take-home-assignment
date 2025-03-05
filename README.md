@@ -166,7 +166,11 @@ This sends a CSV file located at `./data/data.csv` to the server for processing.
   - Builds the web application package.
 
 - **`pnpm run build`**
+
   - Runs both `build:server` and `build:webapp` in parallel using `--stream`.
+
+- **`pnpm run format`**
+  - Formats the monorepo with prettier
 
 ---
 
@@ -209,6 +213,12 @@ This sends a CSV file located at `./data/data.csv` to the server for processing.
   - (Optional) Add a build step for the server if needed (e.g., compiling TypeScript).
 
 ## Dependencies Overview
+
+### **Root Dependencies Overview**
+
+#### **Development Dependencies**
+
+- **[`prettier`](https://prettier.io/)**: An opinionated code formatter
 
 ### **Web Application Dependencies Overview**
 

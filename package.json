@@ -10,9 +10,13 @@
     "seed:server": "pnpm --filter server run seed",
     "build:server": "pnpm --filter server run build",
     "build:webapp": "pnpm --filter webapp run build",
-    "build": "pnpm run --stream /^build:.*/"
+    "build": "pnpm run --stream /^build:.*/",
+    "format": "prettier --write \"**/*.{html,json,md,sql,ts,tsx}\" --ignore-path .gitignore"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
 }

@@ -15,7 +15,7 @@ async function seed(): Promise<void> {
       await fs.access(folderPath);
     } catch {
       console.log(
-        `The data folder does not exist. Creating one at ${folderPath}`
+        `The data folder does not exist. Creating one at ${folderPath}`,
       );
       await fs.mkdir(folderPath);
     }
@@ -38,7 +38,7 @@ async function seed(): Promise<void> {
             min: CONFIG.SEED_MIN_SALARY,
             max: CONFIG.SEED_MAX_SALARY,
           }),
-        })
+        }),
       );
     }
 

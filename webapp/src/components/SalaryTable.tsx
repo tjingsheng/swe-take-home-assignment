@@ -3,6 +3,7 @@ import {
   Card,
   Group,
   Loader,
+  NumberInput,
   Stack,
   Table,
   Text,
@@ -16,16 +17,19 @@ type SortKey = "DEFAULT" | "NAME" | "SALARY";
 
 export function SalaryTable() {
   const [sort, setSort] = useState<SortKey>("DEFAULT");
+  const [offset, setOffset] = useState<number>(0);
+
   const handleSort = (key: SortKey) => {
     setSort((prev) => (prev === key ? "DEFAULT" : key));
   };
 
   const { isLoading, data: persons } = useQuery({
-    queryKey: ["persons", sort],
+    queryKey: ["persons", sort, offset],
     queryFn: async () => {
       const response = await axios.get("/api/users", {
         params: {
           sort: sort !== "DEFAULT" ? sort : undefined,
+          offset: Math.max(offset, 0),
         },
       });
 
@@ -44,7 +48,14 @@ export function SalaryTable() {
     persons && (
       <Stack>
         <Card withBorder>
-          <Group></Group>
+          <Group>
+            <NumberInput
+              label="Offset"
+              value={offset}
+              min={0}
+              onChange={(value) => setOffset(parseInt(String(value), 10))}
+            />
+          </Group>
         </Card>
         <Table>
           <Table.Thead>

@@ -206,6 +206,11 @@ This sends a CSV file located at `./data/data.csv` to the server for processing.
 
 ### **Server Scripts**
 
+- **`pnpm run start`**
+
+  - Starts the production server with `tsx watch`, enabling live reloading for TypeScript changes.
+  - Uses `cross-env` to set `NODE_ENV=production` consistently across operating systems.
+
 - **`pnpm run dev`**
 
   - Starts the development server with `tsx watch`, enabling live reloading for TypeScript changes.

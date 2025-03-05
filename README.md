@@ -6,6 +6,8 @@ Webapp: https://main.d2onw2mh99c9sz.amplifyapp.com/
 
 Server: https://vz3zbcpx7i3gxn3gtw4x46ikv40gcbpu.lambda-url.ap-southeast-1.on.aws/
 
+---
+
 ## Introduction
 
 This is Tan Jing Sheng's implementation of the [SWE Take Home Assignment](https://github.com/bryanlohxz/swe-take-home-assignment).
@@ -15,6 +17,8 @@ This is Tan Jing Sheng's implementation of the [SWE Take Home Assignment](https:
 | Received  | = 5th March 2025, 4:48 PM |
 | Started   | ~ 5th March 2025, 5:00 PM |
 | Completed | ~ 6th March 2025, 7:00 AM |
+
+---
 
 ## Setup
 
@@ -69,6 +73,8 @@ Ensure that these dependencies are installed before proceeding with the setup.
 
 This will run the application in development mode with live reload.
 
+---
+
 ## Assumptions and Interpretations
 
 1. Sorting Criteria
@@ -113,6 +119,8 @@ This will run the application in development mode with live reload.
 
    Assumption: User names are not required to be unique. Names are treated as case-sensitive, meaning "JohnDoe" and "johndoe" are considered different users.
 
+---
+
 ## API Endpoints
 
 ### Fetch Users
@@ -148,7 +156,7 @@ curl -X POST "http://localhost:3000/upload" \
 
 Note: modify the curl to use a file that exists on your system.
 
-This sends a CSV file located at `./data/data.csv` to the server for processing.
+This sends a CSV file located at `./server/data/test.csv` to the server for processing.
 
 ### **Root-Level Scripts**
 
@@ -233,7 +241,7 @@ This sends a CSV file located at `./data/data.csv` to the server for processing.
 
   - Automatically zips the build for easier deployment.
 
-## Dependencies Overview
+---
 
 ## **Production Dependencies**
 

@@ -28,16 +28,16 @@ export function headerTransform(headers: (string | null | undefined)[]) {
   return headers.map((header) => (header ? header.toLowerCase() : ""));
 }
 
-export function parseCSV(buffer: Buffer): Promise<unknown[]> {
+export function parseCSV(input: Buffer | string): Promise<unknown[]> {
   return new Promise((resolve, reject) => {
-    if (!buffer || buffer.length === 0) {
+    if (!input || input.length === 0) {
       return reject(new Error("Buffer is empty or invalid"));
     }
 
     const results: unknown[] = [];
 
     try {
-      const readableStream = Readable.from(buffer.toString());
+      const readableStream = Readable.from(input.toString());
       readableStream
         .pipe(
           parse({

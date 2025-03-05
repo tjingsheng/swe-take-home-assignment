@@ -37,6 +37,42 @@ apiRouter.get("/users", async (req, res, next) => {
   }
 });
 
+apiRouter.post("/upload", async (req, res, next) => {
+  try {
+    const csvData = req.body.file;
+    if (!csvData) {
+      throw new Error("No CSV data provided");
+    }
+
+    const csvString = decodeURIComponent(csvData);
+
+    const existingData = await readData();
+    const existingPersons = validatePersons(existingData);
+
+    const newPersons = validatePersons(await parseCSV(csvString));
+
+    console.log("newPersons", newPersons);
+    const newNames = new Set(newPersons.map((p) => p.name));
+    const filteredExistingPersons = existingPersons.filter(
+      (p) => !newNames.has(p.name)
+    );
+
+    const updatedPersons = [...filteredExistingPersons, ...newPersons];
+    await writeData(updatedPersons);
+
+    const addedCount = updatedPersons.length - existingPersons.length;
+    const updatedCount = newPersons.length - addedCount;
+
+    res.json({
+      success: 1,
+      updatedPersons: updatedCount,
+      addedPersons: addedCount,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 apiRouter.post(
   "/upload-optimised",
   upload.single("file"),

@@ -4,6 +4,8 @@ import { errorHandler } from "./middlewares/errorHandler.ts";
 
 const app: Application = express();
 
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/", apiRouter);
 
 app.use(errorHandler);

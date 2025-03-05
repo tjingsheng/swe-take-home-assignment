@@ -28,6 +28,12 @@ Ambiguity: There is no mentioning of behaviour when the offset exceeds the numbe
 
 Assumption: If offset is greater than the available results, return an empty list ("results": []), not an error.
 
+4. Concurrency and Scaling
+
+Ambiguity: The requirement states that concurrent uploads are desirable but does not specify the expected behaviour when two uploads update the same user.
+
+Assumption: The last successful upload overwrites the previous one (last write wins).
+
 ## Setup
 
 ### Prerequisites

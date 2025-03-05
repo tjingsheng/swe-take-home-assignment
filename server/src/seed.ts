@@ -20,7 +20,7 @@ async function seed(): Promise<void> {
       await fs.mkdir(folderPath);
     }
 
-    const uniqueSeedData = new Set();
+    const uniqueSeedData = new Set<string>();
 
     while (uniqueSeedData.size < CONFIG.SEED_ROWS) {
       uniqueSeedData.add(

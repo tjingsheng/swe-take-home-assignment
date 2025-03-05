@@ -8,7 +8,13 @@ Done on 5th March 2025
 
 ## Assumptions and Interpretations
 
-> TODO: Add assumptions and interpretations
+1. Sorting Criteria
+
+Ambiguity: Sorting is only mentioned as NAME or SALARY, always in ascending order. There is no mention of whether sorting can be combined (e.g., sorting first by SALARY and then by NAME in case of ties).
+
+If more than one sort key is provided (e.g., ["SALARY", "NAME"]), we apply sorting in the order given, prioritizing the first key before moving to the next.
+
+e.g. http://localhost:3000/users?sort=NAME&sort=SALARY will sort by NAME then SALARY is there is a tie
 
 ## Setup
 

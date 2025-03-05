@@ -31,7 +31,11 @@ apiRouter.get("/users", async (req, res, next) => {
       queryParams
     );
 
-    res.json({ results: sortedFilteredLimitedPersons, success: 1 });
+    res.json({
+      results: sortedFilteredLimitedPersons,
+      success: 1,
+      count: sortedFilteredLimitedPersons.length,
+    });
   } catch (error) {
     next(error);
   }

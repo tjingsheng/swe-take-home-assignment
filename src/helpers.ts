@@ -59,7 +59,10 @@ export function parseCSV(input: Buffer | string): Promise<unknown[]> {
 
 export function validateQueryParams(queryParams: Record<string, unknown>) {
   const queryParamNumber = z.coerce.number().nonnegative();
-  const sortSchema = z.enum(["NAME", "SALARY"]);
+  const sortSchema = z.union([
+    z.enum(["NAME", "SALARY"]),
+    z.array(z.enum(["NAME", "SALARY"])),
+  ]);
   const parseQueryParam = <T>(
     schema: z.ZodType<T>,
     value: unknown,
@@ -109,11 +112,16 @@ export function sortFilterLimitData(
     return salary >= min && salary <= max;
   });
 
+  const sortKeys = Array.isArray(sort) ? sort : [sort];
   const sortedData = filteredData.sort((a, b) => {
-    if (sort === "NAME") {
-      return a.name.localeCompare(b.name, CONFIG.LOCALE);
-    } else if (sort === "SALARY") {
-      return Number(a.salary) - Number(b.salary);
+    for (const criteria of sortKeys) {
+      if (criteria === "NAME") {
+        const result = a.name.localeCompare(b.name, CONFIG.LOCALE);
+        if (result !== 0) return result;
+      } else if (criteria === "SALARY") {
+        const result = Number(a.salary) - Number(b.salary);
+        if (result !== 0) return result;
+      }
     }
     return 0;
   });

@@ -1,5 +1,5 @@
 import express, { type Router } from "express";
-import { readData } from "../db/read.ts";
+
 import multer from "multer";
 import { writeData } from "../db/write.ts";
 
@@ -9,6 +9,7 @@ import {
   validatePersons,
   validateQueryParams,
 } from "../helpers.ts";
+import { readData } from "../db/read.ts";
 
 export const apiRouter: Router = express.Router();
 const upload = multer();

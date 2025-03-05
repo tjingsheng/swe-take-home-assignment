@@ -1,6 +1,117 @@
-This is Tan Jing Sheng's implementation of https://github.com/bryanlohxz/swe-take-home-assignment
+# GovTech Take Home Assignment
 
-# SWE Take Home Assignment
+## Introduction
+
+This is Tan Jing Sheng's implementation of the [GovTech SWE Take Home Assignment](https://github.com/bryanlohxz/swe-take-home-assignment).
+
+Done on 5th March 2025
+
+## Assumptions and Interpretations
+
+> TODO: Add assumptions and interpretations
+
+## Setup
+
+### Prerequisites
+
+To set up and run the project, you need the following:
+
+- [Node.js](https://nodejs.org/) (Latest LTS version recommended)
+- [pnpm](https://pnpm.io/) (Package manager, install via `npm install -g pnpm`)
+
+Ensure that these dependencies are installed before proceeding with the setup.
+
+### Installation
+
+1. Clone the repository:
+
+   ```sh
+   git clone https://github.com/tjingsheng/swe-take-home-assignment.git
+   cd swe-take-home-assignment
+   ```
+
+2. Install dependencies using `pnpm`:
+
+   ```sh
+   pnpm install
+   ```
+
+3. Seed the database:
+
+   ```sh
+   pnpm run seed
+   ```
+
+   This will populate the database with initial test data.
+
+   > Note: This shoud run automatically after `pnpm install`
+
+4. Start the development server:
+
+   ```sh
+   pnpm run dev
+   ```
+
+This will run the application in development mode with live reload.
+
+## API Endpoints
+
+### Fetch Users
+
+You can fetch user data using the following `curl` command:
+
+````sh
+curl -G "http://localhost:3000/users" \
+--data-urlencode "min=1000" \
+--data-urlencode "max=5000" \
+--data-urlencode "offset=10" \
+--data-urlencode "limit=50" \
+--data-urlencode "sort=NAME"```
+````
+
+This request retrieves users whose salary falls between 1,000 and 5,000, with pagination controls (`offset=10`, `limit=50`) and sorted by name.
+
+### Upload a CSV File
+
+To upload a CSV file containing user data, use:
+
+```sh
+curl -X POST "http://localhost:3000/upload" \
+-H "Content-Type: multipart/form-data" \
+-F "file=@./data/data.csv"
+```
+
+This sends a CSV file located at `./data/data.csv` to the server for processing.
+
+## Explanation of Scripts
+
+- **`pnpm run postinstall`**
+
+  - Automatically runs the `seed` script after dependencies are installed, ensuring the database is populated without manual intervention.
+
+- **`pnpm run dev`**
+
+  - Starts the development server with `tsx watch`, which enables live reloading for TypeScript changes.
+  - Uses `cross-env` to ensure the `NODE_ENV=development` variable is set across different OS environments.
+
+- **`pnpm run seed`**
+
+  - Runs the `seed.ts` script to populate the database with fake user data for testing.
+  - Uses `faker-js` to generate realistic test data.
+
+## Dependencies Overview
+
+- **[`express`](https://expressjs.com/)**: Lightweight web framework for building APIs.
+- **[`fast-csv`](https://c2fo.github.io/fast-csv/)**: Handles CSV parsing and processing.
+- **[`multer`](https://github.com/expressjs/multer)**: Middleware for handling file uploads.
+- **[`zod`](https://zod.dev/)**: Schema validation library for input validation.
+- **[`@faker-js/faker`](https://fakerjs.dev/)**: Generates random test data.
+- **[`tsx`](https://github.com/esbuild-kit/tsx)**: Runs TypeScript files without needing compilation.
+- **[`cross-env`](https://github.com/kentcdodds/cross-env)**: Allows setting environment variables in a cross-platform manner.
+
+# README.md from the original repositiory
+
+## SWE Take Home Assignment
 
 The goal of this task is to help us better understand your abilities, including how you think through problems, implement solutions, and approach challenges. It’s not just about completing the assignment but about demonstrating your technical strengths and creativity.
 
@@ -8,7 +119,7 @@ You have up to **5 days** to complete the assignment, starting from when you rec
 
 Adapted from [GovTech ACE Hiring](https://github.com/GovTechSG/ace-hiring/blob/master/cds/swe-take-home.md)
 
-# BACKGROUND
+## BACKGROUND
 
 Develop a web application with the following HTTP endpoints.
 
@@ -115,14 +226,14 @@ Mary Posa, 3000.00
 - Uploads with an improperly structured CSV file that should contain at least some good rows.
 - File should be rejected and none of the good rows should have been applied.
 
-# TASK
+## TASK
 
 Use [express](https://expressjs.com/) for the project. You may use JavaScript or TypeScript.
 
-# APPROACH
+## APPROACH
 
 This is a simple assignment, so please feel free to apply coding best practices and technical designs that can demonstrate your understanding.
 
-# SUBMISSION
+## SUBMISSION
 
 Please upload your code to GitHub and email us the link of the public repository. You can also include other documents that you deem necessary for the submission, good luck! ☺

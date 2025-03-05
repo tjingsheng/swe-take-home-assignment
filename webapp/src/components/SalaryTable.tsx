@@ -18,18 +18,20 @@ type SortKey = "DEFAULT" | "NAME" | "SALARY";
 export function SalaryTable() {
   const [sort, setSort] = useState<SortKey>("DEFAULT");
   const [offset, setOffset] = useState<number>(0);
+  const [limit, setLimit] = useState<number>(0);
 
   const handleSort = (key: SortKey) => {
     setSort((prev) => (prev === key ? "DEFAULT" : key));
   };
 
   const { isLoading, data: persons } = useQuery({
-    queryKey: ["persons", sort, offset],
+    queryKey: ["persons", sort, offset, limit],
     queryFn: async () => {
       const response = await axios.get("/api/users", {
         params: {
           sort: sort !== "DEFAULT" ? sort : undefined,
           offset: Math.max(offset, 0),
+          limit: Math.max(limit, 0),
         },
       });
 
@@ -53,7 +55,15 @@ export function SalaryTable() {
               label="Offset"
               value={offset}
               min={0}
+              description="Offset from the beginning"
               onChange={(value) => setOffset(parseInt(String(value), 10))}
+            />
+            <NumberInput
+              label="Limit"
+              value={limit}
+              min={0}
+              description="0 means no limit"
+              onChange={(value) => setLimit(parseInt(String(value), 10))}
             />
           </Group>
         </Card>

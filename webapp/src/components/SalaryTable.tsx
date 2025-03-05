@@ -1,6 +1,8 @@
 import {
   ActionIcon,
+  Button,
   Card,
+  Center,
   Grid,
   Group,
   Loader,
@@ -49,6 +51,13 @@ export function SalaryTable() {
     },
   });
 
+  const handleClearFilters = () => {
+    setOffset(0);
+    setLimit(0);
+    setMin(0);
+    setMax(4000);
+  };
+
   return isLoading ? (
     <Loader />
   ) : (
@@ -94,6 +103,9 @@ export function SalaryTable() {
                 onChange={(value) => setMax(parseInt(String(value), 10))}
               />
             </Grid.Col>
+            <Center w="100%" m="md" onClick={handleClearFilters}>
+              <Button>Clear Filters</Button>
+            </Center>
           </Grid>
         </Card>
         <Table>

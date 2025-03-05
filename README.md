@@ -235,6 +235,7 @@ This sends a CSV file located at `./data/data.csv` to the server for processing.
 - **[`axios`](https://axios-http.com/)**: Promise based HTTP client for the browser and node.js.
 - **[`react`](https://react.dev/)**: The library for web and native user interfaces.
 - **[`react-dom`](https://react.dev/)**: The entry point to the DOM and server renderers for React.
+- **[`react-router`](https://reactrouter.com/)**: A user‑obsessed, standards‑focused, multi‑strategy router you can deploy anywhere.
 
 #### **Development Dependencies**
 

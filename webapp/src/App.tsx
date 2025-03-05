@@ -1,8 +1,9 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SalaryTable } from "./components/SalaryTable.tsx";
-import { Card, Center, createTheme, MantineProvider } from "@mantine/core";
+
+import { createTheme, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
-import { Socials } from "./components/Socials.tsx";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { Home } from "./Home.tsx";
 
 const queryClient = new QueryClient();
 const theme = createTheme({});
@@ -11,16 +12,12 @@ export function App() {
   return (
     <MantineProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <Socials />
-        <Center>
-          <Card
-            w={{ base: "100%", sm: "80%", md: "60%", lg: "40%" }}
-            m="xl"
-            withBorder
-          >
-            <SalaryTable />
-          </Card>
-        </Center>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </BrowserRouter>
       </QueryClientProvider>
     </MantineProvider>
   );

@@ -130,21 +130,74 @@ Note: modify the curl to use a file that exists on your system.
 
 This sends a CSV file located at `./data/data.csv` to the server for processing.
 
-## Explanation of Scripts
+### **Root-Level Scripts**
 
-- **`pnpm run postinstall`**
+- **`pnpm run dev:server`**
 
-  - Automatically runs the `seed` script after dependencies are installed, ensuring the database is populated without manual intervention.
+  - Runs the development server (`server` package).
+
+- **`pnpm run dev:webapp`**
+
+  - Runs the development environment for the web application (`webapp` package).
 
 - **`pnpm run dev`**
 
-  - Starts the development server with `tsx watch`, which enables live reloading for TypeScript changes.
-  - Uses `cross-env` to ensure the `NODE_ENV=development` variable is set across different OS environments.
+  - Runs all `dev` scripts in parallel using `--stream` for better output handling.
+
+- **`pnpm run seed:server`**
+
+  - Seeds the server database with test data.
+
+- **`pnpm run build:server`**
+
+  - Builds the server package.
+
+- **`pnpm run build:webapp`**
+
+  - Builds the web application package.
+
+- **`pnpm run build`**
+  - Runs both `build:server` and `build:webapp` in parallel using `--stream`.
+
+---
+
+### **Web Application Scripts**
+
+- **`pnpm run dev`**
+
+  - Starts the web application using Vite.
+
+- **`pnpm run build`**
+
+  - Builds the TypeScript and Vite project.
+
+- **`pnpm run lint`**
+
+  - Runs ESLint to check for code issues.
+
+- **`pnpm run preview`**
+  - Previews the built web application.
+
+---
+
+### **Server Scripts**
+
+- **`pnpm run dev`**
+
+  - Starts the development server with `tsx watch`, enabling live reloading for TypeScript changes.
+  - Uses `cross-env` to set `NODE_ENV=development` consistently across operating systems.
 
 - **`pnpm run seed`**
 
-  - Runs the `seed.ts` script to populate the database with fake user data for testing.
+  - Runs `seed.ts` to populate the database with fake user data for testing.
   - Uses `faker-js` to generate realistic test data.
+
+- **`pnpm run postinstall`**
+
+  - Automatically runs `seed` after dependencies are installed, ensuring the database is populated without manual intervention.
+
+- **`pnpm run build`**
+  - (Optional) Add a build step for the server if needed (e.g., compiling TypeScript).
 
 ## Dependencies Overview
 

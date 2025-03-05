@@ -7,7 +7,10 @@
     "dev:server": "pnpm --filter server run dev",
     "dev:webapp": "pnpm --filter webapp run dev",
     "dev": "pnpm run --stream /^dev:.*/",
-    "seed:server": "pnpm --filter server run seed"
+    "seed:server": "pnpm --filter server run seed",
+    "build:server": "pnpm --filter server run build",
+    "build:webapp": "pnpm --filter webapp run build",
+    "build": "pnpm run --stream /^build:.*/"
   },
   "keywords": [],
   "author": "",

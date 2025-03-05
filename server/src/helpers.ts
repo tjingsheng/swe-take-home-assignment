@@ -13,7 +13,7 @@ export function validatePersons(data: unknown[]): Person[] {
   const validatePerson = (person: unknown): Person | undefined => {
     const validation = personSchema.safeParse(person);
     if (!validation.success) {
-      console.error("Invalid person data:", validation.error);
+      console.error("Invalid person data:", person);
       console.log("Skipping invalid person data", person);
       return undefined;
     }
@@ -70,7 +70,6 @@ export function validateQueryParams(queryParams: Record<string, unknown>) {
   ): T => {
     const result = schema.safeParse(value);
     if (!result.success) {
-      console.log(`Error parsing query param:`, result.error);
       return defaultValue;
     }
     return result.data;

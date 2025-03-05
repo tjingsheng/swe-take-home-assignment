@@ -34,10 +34,11 @@ export function CsvFileInput() {
     <Stack align="center">
       <FileInput
         label="Upload CSV file"
-        description="We only support CSV files"
+        description="Note that there is a 6mb limit on production. No validation is done on the file size."
         value={value}
         onChange={setValue}
         w="100%"
+        disabled={isPending}
       />
       <Button type="submit" onClick={handleSubmit} disabled={isPending}>
         {isPending ? "Uploading..." : "Submit"}

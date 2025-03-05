@@ -43,6 +43,12 @@ Assumption:
 - `200 OK` → Successful operations.
 - `500 Internal Server Error` → Unexpected failures.
 
+6. Unique Name Handling
+
+Ambiguity: The requirement does not specify whether user names should be unique or how case sensitivity is handled when determining uniqueness.
+
+Assumption: User names are not required to be unique. Names are treated as case-sensitive, meaning "JohnDoe" and "johndoe" are considered different users.
+
 ## Setup
 
 ### Prerequisites

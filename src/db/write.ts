@@ -55,13 +55,7 @@ export async function writeData(
       .pipe(writableStream);
 
     try {
-      newData.forEach((row) => {
-        if (!row.name || !row.salary) {
-          console.warn("Skipping invalid row:", row);
-          return;
-        }
-        csvStream.write(row);
-      });
+      newData.forEach((row) => csvStream.write(row));
     } catch (err) {
       console.error("Error writing rows:", err);
       return reject(new Error("Error writing data to CSV."));

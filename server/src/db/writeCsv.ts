@@ -4,8 +4,8 @@ import { format } from "fast-csv";
 import axios from "axios";
 import { CONFIG } from "../config.ts";
 
-export async function writeData(
-  newData: Record<string, unknown[]>
+export async function writeCsv(
+  newData: Record<string, unknown>[]
 ): Promise<void> {
   const NODE_ENV = process.env.NODE_ENV || "development";
   const isProduction = NODE_ENV === "production";

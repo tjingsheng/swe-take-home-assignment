@@ -7,7 +7,7 @@ import { Readable } from "stream";
 import { headerTransform } from "../helpers.ts";
 import { CONFIG } from "../config.ts";
 
-export async function readData(): Promise<unknown[]> {
+export async function readCsv(): Promise<unknown[]> {
   const NODE_ENV = process.env.NODE_ENV || "development";
   const isProduction = NODE_ENV === "production";
   const data: unknown[] = [];

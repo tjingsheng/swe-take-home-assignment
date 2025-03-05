@@ -1,7 +1,6 @@
 import express, { type Router } from "express";
 
 import multer from "multer";
-import { writeData } from "../db/write.ts";
 
 import {
   parseCSV,
@@ -9,7 +8,8 @@ import {
   validatePersons,
   validateQueryParams,
 } from "../helpers.ts";
-import { readData } from "../db/read.ts";
+import { readCsv } from "../db/readCsv.ts";
+import { writeCsv } from "../db/writeCsv.ts";
 
 export const apiRouter: Router = express.Router();
 const upload = multer();
@@ -25,7 +25,7 @@ apiRouter.get("/health", (_, res, next) => {
 apiRouter.get("/users", async (req, res, next) => {
   try {
     const queryParams = validateQueryParams(req.query);
-    const csvData = await readData();
+    const csvData = await readCsv();
     const persons = validatePersons(csvData);
     const sortedFilteredLimitedPersons = sortFilterLimitData(
       persons,
@@ -54,7 +54,7 @@ apiRouter.post("/upload", upload.single("file"), async (req, res, next) => {
       throw new Error("No CSV data provided");
     }
 
-    const existingData = await readData();
+    const existingData = await readCsv();
     const existingPersons = validatePersons(existingData);
 
     const newPersons = validatePersons(await parseCSV(csvData));
@@ -64,7 +64,7 @@ apiRouter.post("/upload", upload.single("file"), async (req, res, next) => {
     );
 
     const updatedPersons = [...filteredExistingPersons, ...newPersons];
-    await writeData(updatedPersons);
+    await writeCsv(updatedPersons);
 
     const addedCount = updatedPersons.length - existingPersons.length;
     const updatedCount = newPersons.length - addedCount;

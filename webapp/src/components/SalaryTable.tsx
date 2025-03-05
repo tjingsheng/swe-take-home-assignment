@@ -31,7 +31,7 @@ export function SalaryTable() {
           {persons.map((person) => (
             <Table.Tr key={person.name}>
               <Table.Td>{person.name}</Table.Td>
-              <Table.Td>{person.salary}</Table.Td>
+              <Table.Td>${person.salary.toFixed(2)}</Table.Td>
             </Table.Tr>
           ))}
         </Table.Tbody>

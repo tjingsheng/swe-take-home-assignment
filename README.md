@@ -8,9 +8,13 @@ Server: https://vz3zbcpx7i3gxn3gtw4x46ikv40gcbpu.lambda-url.ap-southeast-1.on.aw
 
 ## Introduction
 
-This is Tan Jing Sheng's implementation of the [GovTech SWE Take Home Assignment](https://github.com/bryanlohxz/swe-take-home-assignment).
+This is Tan Jing Sheng's implementation of the [SWE Take Home Assignment](https://github.com/bryanlohxz/swe-take-home-assignment).
 
-Done on 5th March 2025
+| Event     | Date & Time               |
+| --------- | ------------------------- |
+| Received  | = 5th March 2025, 4:48 PM |
+| Started   | ~ 5th March 2025, 5:00 PM |
+| Completed | ~ 6th March 2025, 7:00 AM |
 
 ## Assumptions and Interpretations
 

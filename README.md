@@ -210,7 +210,12 @@ This sends a CSV file located at `./data/data.csv` to the server for processing.
   - Automatically runs `seed` after dependencies are installed, ensuring the database is populated without manual intervention.
 
 - **`pnpm run build`**
+
   - (Optional) Add a build step for the server if needed (e.g., compiling TypeScript).
+
+- **`pnpm run postbuild`**
+
+  - Automatically zips the build for easier deployment.
 
 ## Dependencies Overview
 

@@ -69,13 +69,22 @@ Ensure that these dependencies are installed before proceeding with the setup.
    cd swe-take-home-assignment
    ```
 
-2. Install dependencies using `pnpm`:
+2. # Copy .env.example to .env and edit it
+
+   ```sh
+   cp .env.example .env
+   vim .env # or use any text editor to fill in the required values
+   ```
+
+   > Note: There are no require values for local development, but you should still have the .env file
+
+3. Install dependencies using `pnpm`:
 
    ```sh
    pnpm install
    ```
 
-3. Seed the database:
+4. Seed the database:
 
    ```sh
    pnpm run seed
@@ -85,7 +94,7 @@ Ensure that these dependencies are installed before proceeding with the setup.
 
    > Note: This shoud run automatically after `pnpm install`
 
-4. Start the development server:
+5. Start the development server:
 
    ```sh
    pnpm run dev
@@ -373,3 +382,7 @@ This is a simple assignment, so please feel free to apply coding best practices 
 ## SUBMISSION
 
 Please upload your code to GitHub and email us the link of the public repository. You can also include other documents that you deem necessary for the submission, good luck! ☺
+
+```
+
+```

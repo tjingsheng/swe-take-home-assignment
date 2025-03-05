@@ -25,3 +25,5 @@ dist-ssr
 
 server/data/*
 !server/data/README.md
+
+.env

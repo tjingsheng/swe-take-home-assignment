@@ -1,6 +1,9 @@
 import express, { type Application } from "express";
 import { apiRouter } from "./routes/index.ts";
 import { errorHandler } from "./middlewares/errorHandler.ts";
+import dotenvx from "@dotenvx/dotenvx";
+
+dotenvx.config({ path: "../.env" });
 
 const app: Application = express();
 

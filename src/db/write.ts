@@ -1,12 +1,13 @@
 import fs from "fs";
 import path from "path";
 import { format } from "fast-csv";
-import { Person } from "../helpers.ts";
 
 const DATA_FOLDER = "data"; // TODO: Move to a config file
 const CSV_FILE = "data.csv"; // TODO: Move to a config file
 
-export async function writeData(newData: Person[]): Promise<void> {
+export async function writeData(
+  newData: Record<string, unknown>[]
+): Promise<void> {
   const folderPath = path.join(process.cwd(), DATA_FOLDER);
   const filePath = path.join(folderPath, CSV_FILE);
 
@@ -34,11 +35,10 @@ export async function writeData(newData: Person[]): Promise<void> {
 
     const csvStream = format({
       headers: true,
-      transform: (row: Person) => {
-        return {
-          NAME: row.name,
-          SALARY: row.salary,
-        };
+      transform: (row: Record<string, unknown>) => {
+        return Object.fromEntries(
+          Object.entries(row).map(([key, value]) => [key.toUpperCase(), value])
+        );
       },
     });
 

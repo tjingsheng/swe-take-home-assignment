@@ -14,7 +14,7 @@ const personSchema = z.object({
   name: z.string(),
   salary: z.coerce.number().nonnegative(),
 });
-export type Person = z.infer<typeof personSchema>;
+type Person = z.infer<typeof personSchema>;
 
 export function validatePersons(data: unknown[]): Person[] {
   const validatePerson = (person: unknown): Person | undefined => {

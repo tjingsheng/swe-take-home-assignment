@@ -37,37 +37,40 @@ apiRouter.get("/users", async (req, res, next) => {
   }
 });
 
-// TODO: We should use application/x-www-form-urlencoded as required, instead of multipart/form-data for file uploads
-apiRouter.post("/upload", upload.single("file"), async (req, res, next) => {
-  try {
-    const fileBuffer = req.file?.buffer;
-    if (!fileBuffer) {
-      throw new Error("No file uploaded");
+apiRouter.post(
+  "/upload-optimised",
+  upload.single("file"),
+  async (req, res, next) => {
+    try {
+      const fileBuffer = req.file?.buffer;
+      if (!fileBuffer) {
+        throw new Error("No file uploaded");
+      }
+
+      const existingData = await readData();
+      const existingPersons = validatePersons(existingData);
+
+      const csvData = await parseCSV(fileBuffer);
+      const newPersons = validatePersons(csvData);
+
+      const newNames = new Set(newPersons.map((p) => p.name));
+      const filteredExistingPersons = existingPersons.filter(
+        (p) => !newNames.has(p.name)
+      );
+
+      const updatedPersons = [...filteredExistingPersons, ...newPersons];
+      await writeData(updatedPersons);
+
+      const addedCount = updatedPersons.length - existingPersons.length;
+      const updatedCount = newPersons.length - addedCount;
+
+      res.json({
+        success: 1,
+        updatedPersons: updatedCount,
+        addedPersons: addedCount,
+      });
+    } catch (error) {
+      next(error);
     }
-
-    const existingData = await readData();
-    const existingPersons = validatePersons(existingData);
-
-    const csvData = await parseCSV(fileBuffer);
-    const newPersons = validatePersons(csvData);
-
-    const newNames = new Set(newPersons.map((p) => p.name));
-    const filteredExistingPersons = existingPersons.filter(
-      (p) => !newNames.has(p.name)
-    );
-
-    const updatedPersons = [...filteredExistingPersons, ...newPersons];
-    await writeData(updatedPersons);
-
-    const addedCount = updatedPersons.length - existingPersons.length;
-    const updatedCount = newPersons.length - addedCount;
-
-    res.json({
-      success: 1,
-      updatedPersons: updatedCount,
-      addedPersons: addedCount,
-    });
-  } catch (error) {
-    next(error);
   }
-});
+);

@@ -16,49 +16,6 @@ This is Tan Jing Sheng's implementation of the [SWE Take Home Assignment](https:
 | Started   | ~ 5th March 2025, 5:00 PM |
 | Completed | ~ 6th March 2025, 7:00 AM |
 
-## Assumptions and Interpretations
-
-1. Sorting Criteria
-
-Ambiguity: Sorting is only mentioned as NAME or SALARY, always in ascending order. There is no mention of whether sorting can be combined (e.g., sorting first by SALARY and then by NAME in case of ties).
-
-Assumption: If more than one sort key is provided (e.g., ["SALARY", "NAME"]), we apply sorting in the order given, prioritising the first key before moving to the next.
-
-e.g. /users?sort=NAME&sort=SALARY will sort by NAME then SALARY is there is a tie.
-
-2. Salary Range Handling
-
-Ambiguity: The default values are 0.0 for min and 4000.0 for max. However, it's not explicitly stated what happens if min > max (e.g., /users?min=5000&max=4000).
-
-Assumption: If min > max, return an empty list ("results": []), not an error.
-
-3. Offset and Limit Behaviour
-
-Ambiguity: There is no mentioning of behaviour when the offset exceeds the number of available records.
-
-Assumption: If offset is greater than the available results, return an empty list ("results": []), not an error.
-
-4. Concurrency and Scaling
-
-Ambiguity: The requirement states that concurrent uploads are desirable but does not specify the expected behaviour when two uploads update the same user.
-
-Assumption: The last successful upload overwrites the previous one (last write wins).
-
-5. HTTP Response Codes
-
-Ambiguity: Which HTTP status codes should be used for specific failures?
-
-Assumption:
-
-- `200 OK` → Successful operations.
-- `500 Internal Server Error` → Unexpected failures.
-
-6. Unique Name Handling
-
-Ambiguity: The requirement does not specify whether user names should be unique or how case sensitivity is handled when determining uniqueness.
-
-Assumption: User names are not required to be unique. Names are treated as case-sensitive, meaning "JohnDoe" and "johndoe" are considered different users.
-
 ## Setup
 
 ### Prerequisites
@@ -79,14 +36,14 @@ Ensure that these dependencies are installed before proceeding with the setup.
    cd swe-take-home-assignment
    ```
 
-2. # Copy .env.example to .env and edit it
+2. Copy .env.example to .env and edit it
 
    ```sh
    cp .env.example .env
    vim .env # or use any text editor to fill in the required values
    ```
 
-   > Note: There are no require values for local development, but you should still have the .env file
+   > Note: There are no required values for local development, but you should still have the .env file
 
 3. Install dependencies using `pnpm`:
 
@@ -111,6 +68,50 @@ Ensure that these dependencies are installed before proceeding with the setup.
    ```
 
 This will run the application in development mode with live reload.
+
+## Assumptions and Interpretations
+
+1. Sorting Criteria
+
+   Ambiguity: Sorting is only mentioned as NAME or SALARY, always in ascending order. There is no mention of whether sorting can be combined (e.g., sorting first by SALARY and then by NAME in case of ties).
+
+   Assumption: If more than one sort key is provided (e.g., ["SALARY", "NAME"]), we apply sorting in the order given, prioritising the first key before moving to the next.
+
+   e.g. /users?sort=NAME&sort=SALARY will sort by NAME then SALARY is there is a tie.
+
+2. Salary Range Handling
+
+   Ambiguity: The default values are 0.0 for min and 4000.0 for max. However, it's not explicitly stated what happens if min > max (e.g., /users?min=5000&max=4000).
+
+   Assumption: If min > max, return an empty list ("results": []), not an error.
+
+3. Offset and Limit Behaviour
+
+   Ambiguity: There is no mentioning of behaviour when the offset exceeds the number of available records.
+
+   Assumption: If offset is greater than the available results, return an empty list ("results": []), not an error.
+
+4. Concurrency and Scaling
+
+   Ambiguity: The requirement states that concurrent uploads are desirable but does not specify the expected behaviour when two uploads update the same user.
+
+   Assumption: The last successful upload overwrites the previous one (last write wins).
+
+5. HTTP Response Codes
+
+   Ambiguity: Which HTTP status codes should be used for specific failures?
+
+   Assumption:
+
+   - `200 OK` → Successful operations.
+   - `404 Not Found` → Unknown Routes.
+   - `500 Internal Server Error` → Unexpected failures.
+
+6. Unique Name Handling
+
+   Ambiguity: The requirement does not specify whether user names should be unique or how case sensitivity is handled when determining uniqueness.
+
+   Assumption: User names are not required to be unique. Names are treated as case-sensitive, meaning "JohnDoe" and "johndoe" are considered different users.
 
 ## API Endpoints
 

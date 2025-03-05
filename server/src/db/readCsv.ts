@@ -9,13 +9,13 @@ import { CONFIG } from "../config.ts";
 
 export async function readCsv(): Promise<unknown[]> {
   const NODE_ENV = process.env.NODE_ENV || "development";
-  const isProduction = NODE_ENV === "production";
+  const isDevelopment = NODE_ENV === "development";
   const data: unknown[] = [];
 
   let stream: Readable;
 
   try {
-    if (!isProduction) {
+    if (isDevelopment) {
       const folderPath = path.join(process.cwd(), CONFIG.DATA_FOLDER);
       const filePath = path.join(folderPath, CONFIG.CSV_FILE);
 
@@ -32,7 +32,7 @@ export async function readCsv(): Promise<unknown[]> {
 
       if (!GIST_ID || !GITHUB_TOKEN) {
         throw new Error(
-          "GIST_ID or GITHUB_TOKEN is missing from environment variables.",
+          "GIST_ID or GITHUB_TOKEN is missing from environment variables."
         );
       }
 
@@ -41,7 +41,7 @@ export async function readCsv(): Promise<unknown[]> {
       const gistResponse = await axios.get(gistUrl, { headers });
 
       const fileKey = Object.keys(gistResponse.data.files).find((file) =>
-        file.endsWith(".csv"),
+        file.endsWith(".csv")
       );
       if (!fileKey) {
         throw new Error("No CSV file found in the Gist.");
@@ -67,7 +67,7 @@ export async function readCsv(): Promise<unknown[]> {
             ignoreEmpty: true,
             trim: true,
             strictColumnHandling: false,
-          }),
+          })
         )
         .on("error", (err) => {
           console.error(`CSV Parsing Error: ${err.message}`);

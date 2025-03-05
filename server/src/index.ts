@@ -6,11 +6,13 @@ import { logRequest } from "./middlewares/logRequest.ts";
 import { parseRequestBodyBuffer } from "./middlewares/parseReqBodyBuffer.ts";
 import serverless from "serverless-http";
 
-dotenvx.config({ path: "../.env" });
+const envPath = process.env.NODE_ENV === "development" ? `../.env` : undefined;
+
+dotenvx.config({ path: envPath });
 
 const app: Application = express();
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV !== "development") {
   app.use(logRequest);
 }
 

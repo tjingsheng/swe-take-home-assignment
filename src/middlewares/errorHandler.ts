@@ -7,5 +7,5 @@ export function errorHandler(
   _next: NextFunction
 ) {
   console.error(err.stack ?? err.message);
-  res.status(500).json({ error: err.message });
+  res.status(500).json({ success: 0, error: err.message });
 }

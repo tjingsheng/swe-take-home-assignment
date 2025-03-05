@@ -3,8 +3,8 @@ import path from "path";
 import { writeToPath } from "fast-csv";
 import { faker } from "@faker-js/faker";
 
-const DATA_FOLDER = "data";
-const CSV_FILE = "data.csv";
+const DATA_FOLDER = "data"; // TODO: Move to a config file
+const CSV_FILE = "data.csv"; // TODO: Move to a config file
 const SEED_ROWS = 100000;
 const MIN_SALARY = 0;
 const MAX_SALARY = 10000;

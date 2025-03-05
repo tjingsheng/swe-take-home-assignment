@@ -15,6 +15,7 @@ import { IconSortAscending } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
+import { CsvFileInput } from "./CsvFileInput.tsx";
 
 type SortKey = "DEFAULT" | "NAME" | "SALARY";
 
@@ -107,6 +108,9 @@ export function SalaryTable() {
               <Button>Clear Filters</Button>
             </Center>
           </Grid>
+        </Card>
+        <Card withBorder>
+          <CsvFileInput />
         </Card>
         <Table>
           <Table.Thead>

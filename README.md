@@ -123,8 +123,10 @@ curl -X POST http://localhost:3000/upload \
 ```sh
 curl -X POST "http://localhost:3000/upload" \
      -H "Content-Type: multipart/form-data" \
-     -F "file=@./data/data.csv"
+     -F "file=@./server/data/test.csv"
 ```
+
+Note: modify the curl to use a file that exists on your system.
 
 This sends a CSV file located at `./data/data.csv` to the server for processing.
 

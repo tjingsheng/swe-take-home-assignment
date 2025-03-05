@@ -1,4 +1,4 @@
 node_modules
 
-data/*
-!data/README.md
+server/data/*
+!server/data/README.md

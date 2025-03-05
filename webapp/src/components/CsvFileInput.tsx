@@ -23,7 +23,8 @@ export function CsvFileInput() {
     },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     if (value) {
       uploadFile(value);
     }

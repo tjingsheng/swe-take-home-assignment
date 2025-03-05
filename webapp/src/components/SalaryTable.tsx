@@ -1,4 +1,5 @@
 import {
+  Accordion,
   ActionIcon,
   Button,
   Card,
@@ -10,8 +11,13 @@ import {
   Stack,
   Table,
   Text,
+  Title,
 } from "@mantine/core";
-import { IconSortAscending } from "@tabler/icons-react";
+import {
+  IconFileTypeCsv,
+  IconFilter,
+  IconSortAscending,
+} from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
@@ -63,94 +69,116 @@ export function SalaryTable() {
     <Loader />
   ) : (
     persons && (
-      <Stack>
+      <Stack gap="xl">
+        <Title> Salary </Title>
+        <Accordion>
+          <Accordion.Item key="filters" value="Filters">
+            <Accordion.Control icon={<IconFilter />}>Filters</Accordion.Control>
+            <Accordion.Panel>
+              <Card withBorder>
+                <Grid>
+                  <Grid.Col span={{ sm: 12, md: 6 }}>
+                    <NumberInput
+                      label="Offset"
+                      value={offset}
+                      min={0}
+                      description="Offset from the beginning"
+                      onChange={(value) =>
+                        setOffset(parseInt(String(value), 10))
+                      }
+                    />
+                  </Grid.Col>
+                  <Grid.Col span={{ sm: 12, md: 6 }}>
+                    <NumberInput
+                      label="Limit"
+                      value={limit}
+                      min={0}
+                      description="0 means no limit"
+                      onChange={(value) =>
+                        setLimit(parseInt(String(value), 10))
+                      }
+                    />
+                  </Grid.Col>
+                  <Grid.Col span={{ sm: 12, md: 6 }}>
+                    <NumberInput
+                      label="Min"
+                      value={min}
+                      min={0}
+                      step={100}
+                      description="Should be less than Max"
+                      onChange={(value) => setMin(parseInt(String(value), 10))}
+                    />
+                  </Grid.Col>
+                  <Grid.Col span={{ sm: 12, md: 6 }}>
+                    <NumberInput
+                      label="Max"
+                      value={max}
+                      min={0}
+                      step={100}
+                      description="Should be greater than Min"
+                      onChange={(value) => setMax(parseInt(String(value), 10))}
+                    />
+                  </Grid.Col>
+                  <Center w="100%" m="md" onClick={handleClearFilters}>
+                    <Button>Clear Filters</Button>
+                  </Center>
+                </Grid>
+              </Card>
+            </Accordion.Panel>
+          </Accordion.Item>
+
+          <Accordion.Item key="upload" value="Upload">
+            <Accordion.Control icon={<IconFileTypeCsv />}>
+              File Upload
+            </Accordion.Control>
+            <Accordion.Panel>
+              <Card withBorder>
+                <CsvFileInput />
+              </Card>
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>
         <Card withBorder>
-          <Grid>
-            <Grid.Col span={{ sm: 12, md: 6 }}>
-              <NumberInput
-                label="Offset"
-                value={offset}
-                min={0}
-                description="Offset from the beginning"
-                onChange={(value) => setOffset(parseInt(String(value), 10))}
-              />
-            </Grid.Col>
-            <Grid.Col span={{ sm: 12, md: 6 }}>
-              <NumberInput
-                label="Limit"
-                value={limit}
-                min={0}
-                description="0 means no limit"
-                onChange={(value) => setLimit(parseInt(String(value), 10))}
-              />
-            </Grid.Col>
-            <Grid.Col span={{ sm: 12, md: 6 }}>
-              <NumberInput
-                label="Min"
-                value={min}
-                min={0}
-                step={100}
-                description="Should be less than Max"
-                onChange={(value) => setMin(parseInt(String(value), 10))}
-              />
-            </Grid.Col>
-            <Grid.Col span={{ sm: 12, md: 6 }}>
-              <NumberInput
-                label="Max"
-                value={max}
-                min={0}
-                step={100}
-                description="Should be greater than Min"
-                onChange={(value) => setMax(parseInt(String(value), 10))}
-              />
-            </Grid.Col>
-            <Center w="100%" m="md" onClick={handleClearFilters}>
-              <Button>Clear Filters</Button>
-            </Center>
-          </Grid>
-        </Card>
-        <Card withBorder>
-          <CsvFileInput />
-        </Card>
-        <Table>
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th>
-                <Group gap="xs" align="center">
-                  <Text>Name</Text>
-                  <ActionIcon
-                    variant={sort === "NAME" ? "filled" : "subtle"}
-                    size="xs"
-                    onClick={() => handleSort("NAME")}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <IconSortAscending />
-                  </ActionIcon>
-                </Group>
-              </Table.Th>
-              <Table.Th>
-                <Group gap="xs" align="center">
-                  <Text>Salary</Text>
-                  <ActionIcon
-                    variant={sort === "SALARY" ? "filled" : "subtle"}
-                    size="xs"
-                    onClick={() => handleSort("SALARY")}
-                  >
-                    <IconSortAscending />
-                  </ActionIcon>
-                </Group>
-              </Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>
-            {persons.map((person) => (
-              <Table.Tr key={person.name}>
-                <Table.Td>{person.name}</Table.Td>
-                <Table.Td>${person.salary.toFixed(2)}</Table.Td>
+          <Table>
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>
+                  <Group gap="xs" align="center">
+                    <Text>Name</Text>
+                    <ActionIcon
+                      variant={sort === "NAME" ? "filled" : "subtle"}
+                      size="xs"
+                      onClick={() => handleSort("NAME")}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <IconSortAscending />
+                    </ActionIcon>
+                  </Group>
+                </Table.Th>
+                <Table.Th>
+                  <Group gap="xs" align="center">
+                    <Text>Salary</Text>
+                    <ActionIcon
+                      variant={sort === "SALARY" ? "filled" : "subtle"}
+                      size="xs"
+                      onClick={() => handleSort("SALARY")}
+                    >
+                      <IconSortAscending />
+                    </ActionIcon>
+                  </Group>
+                </Table.Th>
               </Table.Tr>
-            ))}
-          </Table.Tbody>
-        </Table>
+            </Table.Thead>
+            <Table.Tbody>
+              {persons.map((person) => (
+                <Table.Tr key={person.name}>
+                  <Table.Td>{person.name}</Table.Td>
+                  <Table.Td>${person.salary.toFixed(2)}</Table.Td>
+                </Table.Tr>
+              ))}
+            </Table.Tbody>
+          </Table>
+        </Card>
       </Stack>
     )
   );

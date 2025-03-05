@@ -20,14 +20,29 @@ async function seed(): Promise<void> {
       await fs.mkdir(folderPath);
     }
 
-    const seedData = Array.from({ length: CONFIG.SEED_ROWS }, () => ({
-      NAME: faker.person.firstName(),
-      SALARY: faker.finance.amount({
-        dec: 2,
-        min: CONFIG.SEED_MIN_SALARY,
-        max: CONFIG.SEED_MAX_SALARY,
-      }),
-    }));
+    const uniqueSeedData = new Set();
+
+    while (uniqueSeedData.size < CONFIG.SEED_ROWS) {
+      uniqueSeedData.add(
+        JSON.stringify({
+          NAME:
+            faker.person.firstName() +
+            " " +
+            faker.person.middleName() +
+            " " +
+            faker.person.lastName() +
+            " " +
+            faker.person.suffix(),
+          SALARY: faker.finance.amount({
+            dec: 2,
+            min: CONFIG.SEED_MIN_SALARY,
+            max: CONFIG.SEED_MAX_SALARY,
+          }),
+        })
+      );
+    }
+
+    const seedData = Array.from(uniqueSeedData).map((item) => JSON.parse(item));
 
     writeToPath(filePath, seedData, { headers: true });
 

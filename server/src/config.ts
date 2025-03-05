@@ -4,7 +4,7 @@ export const CONFIG = {
   CSV_FILE: "data.csv",
 
   // seed
-  SEED_ROWS: 10000,
+  SEED_ROWS: 1000,
   SEED_MIN_SALARY: 0,
   SEED_MAX_SALARY: 5000,
 

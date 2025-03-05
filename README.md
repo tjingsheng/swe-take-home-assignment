@@ -1,5 +1,11 @@
 # GovTech Take Home Assignment
 
+## Deployments
+
+Webapp: https://main.d2onw2mh99c9sz.amplifyapp.com/
+
+Server: https://vz3zbcpx7i3gxn3gtw4x46ikv40gcbpu.lambda-url.ap-southeast-1.on.aws/
+
 ## Introduction
 
 This is Tan Jing Sheng's implementation of the [GovTech SWE Take Home Assignment](https://github.com/bryanlohxz/swe-take-home-assignment).

@@ -246,6 +246,7 @@ This sends a CSV file located at `./data/data.csv` to the server for processing.
 
 ### **Development Dependencies**
 
+- **[`@dotenvx/dotenvx`](https://dotenvx.com/)**: a better dotenv–from the creator of dotenv.
 - **[`@faker-js/faker`](https://fakerjs.dev/)**: Generate massive amounts of fake (but realistic) data for testing and development.
 - **[`@types/express`](https://www.npmjs.com/package/@types/express)**: TypeScript types for Express.
 - **[`@types/multer`](https://www.npmjs.com/package/@types/multer)**: TypeScript types for Multer.

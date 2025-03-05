@@ -49,8 +49,6 @@ export function SalaryTable() {
         },
       });
 
-      await new Promise((resolve) => setTimeout(resolve, 100000));
-
       const responseData = response.data;
       const persons = responseData.results as {
         name: string;

@@ -20,7 +20,13 @@ e.g. /users?sort=NAME&sort=SALARY will sort by NAME then SALARY is there is a ti
 
 Ambiguity: The default values are 0.0 for min and 4000.0 for max. However, it's not explicitly stated what happens if min > max (e.g., /users?min=5000&max=4000).
 
-Assumption: If min > max, return zero rows successfully.
+Assumption: If min > max, return an empty list ("results": []), not an error.
+
+3. Offset and Limit Behaviour
+
+Ambiguity: There is no mentioning of behaviour when the offset exceeds the number of available records.
+
+Assumption: If offset is greater than the available results, return an empty list ("results": []), not an error.
 
 ## Setup
 

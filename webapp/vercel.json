@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://agqeo75vinrtmxfzcvo5e6zeoa0pvslx.lambda-url.ap-southeast-1.on.aws/:path*"
+      "destination": "https://6hg7axk5lngd32uzjhfxq2r4tm0kixrk.lambda-url.ap-southeast-1.on.aws/:path*"
     }
   ]
 }
